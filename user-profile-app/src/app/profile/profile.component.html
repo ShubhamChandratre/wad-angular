@@ -1,0 +1,12 @@
+<div class="profile-container" *ngIf="user">
+    <!-- Avatar -->
+    <div class="avatar">
+      <span >{{ user.name[0] | uppercase }}</span>
+    </div>
+  
+    <h2>Welcome, {{ user.name }}</h2>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+  
+    <button (click)="logout()">Logout</button>
+  </div>
+  

@@ -1,0 +1,38 @@
+<div class="todo-container">
+  <h2>Todo List</h2>
+
+  <div class="input-container">
+    <input 
+      type="text" 
+      [(ngModel)]="task" 
+      placeholder="Enter new task"
+      (keyup.enter)="addTask()" />
+    <button (click)="addTask()" class="add-btn">Add Task</button>
+  </div>
+
+  <div class="tasks-list">
+    <div *ngFor="let task of taskList" class="task-item">
+      <div class="task-info">
+        <span class="task-id">#{{ task.id }}</span>
+
+        <ng-container *ngIf="!task.isEditing; else editTemplate">
+          <span class="task-name">{{ task.name }}</span>
+        </ng-container>
+
+        <ng-template #editTemplate>
+          <input 
+            type="text" 
+            [value]="task.name"
+            #editInput
+            (keyup.enter)="saveTask(task, editInput.value)"
+            (blur)="saveTask(task, editInput.value)" />
+        </ng-template>
+      </div>
+
+      <div class="task-actions">
+        <button *ngIf="!task.isEditing" (click)="editTask(task)" class="edit-btn">Edit</button>
+        <button (click)="deleteTask(task.id)" class="delete-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
